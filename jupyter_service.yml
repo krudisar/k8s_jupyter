@@ -15,4 +15,4 @@ spec:
   selector:
     run: jupyter
   sessionAffinity: None
-  type: NodePort
+  type: NodePort # or LoadBalancer
