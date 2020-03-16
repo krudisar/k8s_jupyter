@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: nvidia-jupyter
+  name: nvidia-jupyter
+  namespace: default
+spec:
+  ports:
+  - nodePort: 31111
+    port: 8888 # or 6006
+    protocol: TCP
+    targetPort: 8888 # or 6006
+  selector:
+    run: nvidia-jupyter
+  sessionAffinity: None
+  type: LoadBalancer # or NodePort
+  
