@@ -38,4 +38,4 @@ done; # -> we got our IP address
 #echo $SVC_EXTERNAL_IP
 #echo $JUPYTER_TOKEN
 #
-echo "Jupyter Notebok URL: http://$SVC_EXTERNAL_IP:8888/?token=$JUPYTER_TOKEN"
+echo "http://$SVC_EXTERNAL_IP:8888/?token=$JUPYTER_TOKEN"
