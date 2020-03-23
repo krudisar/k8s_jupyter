@@ -8,14 +8,14 @@ SVC_SVC_EXTERNAL_IP=""
 # create a deployment && wait till it's finished
 #
 kubectl apply -f nvidia-jupyter-deployment.yml > /dev/null 2>&1
-kubectl wait --for=condition=available --timeout=600s deployments/$K8S_DEPLOYMENT_NAME > /dev/null 2>&1
+kubectl wait --for=condition=available --timeout=900s deployments/$K8S_DEPLOYMENT_NAME > /dev/null 2>&1
 
 sleep 30
 
 # get corresponding pod && check if it's ready as well (... just for sure)
 #
 K8S_POD_NAME=$(kubectl get pods -l $K8S_SELECTOR -o json | jq -r '[.items[] | {name:.metadata.name}]' | awk '{print $2}' | tr -d \")
-kubectl wait --for=condition=ready --timeout=600s pods $K8S_POD_NAME > /dev/null 2>&1
+kubectl wait --for=condition=ready --timeout=900s pods $K8S_POD_NAME > /dev/null 2>&1
 
 # extract Jupyter Notebook access token from K8S pod's logs
 #
@@ -35,8 +35,5 @@ while [ "$SVC_EXTERNAL_IP" = "" ]; do
 done; # -> we got our IP address
 
 # ... and now we can share the IP and token with end users
-#
-#echo $SVC_EXTERNAL_IP
-#echo $JUPYTER_TOKEN
 #
 echo "http://$SVC_EXTERNAL_IP:8888/?token=$JUPYTER_TOKEN"
