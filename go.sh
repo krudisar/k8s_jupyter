@@ -22,6 +22,7 @@ kubectl wait --for=condition=ready --timeout=600s pods $K8S_POD_NAME > /dev/null
 LINE_WITH_TOKEN=$(kubectl logs $K8S_POD_NAME | grep "token=" -m 1)
 TEMP_LINE=`echo $LINE_WITH_TOKEN 2>&1 | grep -o "token=[a-z0-9]*" | sed -n 1p`
 JUPYTER_TOKEN=`echo $TEMP_LINE | cut -d'=' -f 2`
+echo "Jupyter token: " $JUPYTER_TOKEN
 
 # and now it's time to expose the deployment to be accessible by end users
 #
